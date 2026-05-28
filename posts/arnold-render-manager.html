@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="description" content="Batch rendering and EXR sequence validation tool for Arnold production workflows.">
+  <title>Arnold Render Manager - Hyunsu Yang</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <style>
+    :root { --gold: #fca311; --black: #000000; --white: #ffffff; }
+    body.post-detail { background: var(--white); color: var(--black); }
+    .post-builder-media { margin: 1.8rem 0; }
+    .post-builder-frame { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--gray); }
+    .post-builder-frame img,
+    .post-builder-frame video { display: block; width: 100%; height: auto; }
+    .post-builder-media video { background: var(--black); }
+    .post-builder-frame .video-embed { margin: 0; border: 0; border-radius: 0; }
+    .post-builder-caption { margin: .75rem 0 0; color: var(--muted); font-size: .95rem; line-height: 1.55; }
+    .media-placeholder { display: grid; min-height: 260px; place-items: center; background: var(--soft); color: var(--muted); font-weight: 900; }
+    .post-main > p { color: var(--muted); font-size: 1.03rem; line-height: 1.75; }
+    .post-main > p + p { margin-top: 1rem; }
+  </style>
+</head>
+<body class="post-detail">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="../index.html">Hyunsu Yang</a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle>
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" data-nav-links>
+        <a href="../index.html">Home</a>
+        <a href="../posts.html">Posts</a>
+        <a href="../CV.html">CV</a>
+        <a href="../about.html">About</a>
+      </div>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="page-hero section-pad">
+      <div class="container narrow reveal">
+        <p class="eyebrow">Maya / Python / Arnold API</p>
+        <h1>Arnold Render Manager</h1>
+        <p class="lead">Batch rendering and EXR sequence validation tool for Arnold production workflows.</p>
+        <div class="hero-actions"><a class="button button-secondary" href="../posts.html">All Posts</a></div>
+      </div>
+    </section>
+    <section class="section-pad">
+      <div class="container post-layout">
+        <article class="post-main reveal">
+          <figure class="post-builder-media"><div class="post-builder-frame"><video src="../assets/video/ArnoldRenderManager_1.mp4" controls playsinline></video></div><p class="post-builder-caption">Demo</p></figure>
+          <h2>Goal</h2><p>An easy-to-use script that streamlines Arnold batch rendering and sequence validation in production pipelines. The tool <br>addresses common pain points in CG production: manual render setup, time-consuming frame checks, and detecting <br>corrupted renders before final delivery. The MVP focuses on two core functions: render sequence management and <br>EXR validation.</p>
+          <h2>Process</h2><p>- PySide2-based Maya tool with two core functions: Render Sequence and Validate Sequence.</p><p>- Render Sequence<br>1. Custom camera selection, frame range, and resolution controls <br>2. Multi-AOV setup: Beauty, Diffuse, Specular, SSS, Transmission, AO, Emission, Z <br>3. Frame-by-frame rendering with real-time progress tracking bar <br>4. Automatic scene save before rendering starts <br>5. Auto-sets validation path after render completes</p><p>- ValidateSequence<br>1. Scans output directory against expected frame range <br>2. Detects missing frames by comparing found files vs expected range <br>3. Identifies corrupt EXR files by checking magic number (first 4 bytes) and file size thresholds <br>4. Generates detailed Validation Report window showing pass/fail status, missing frame list, and corrupt file details with byte sizes</p>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/arnold-render-manager_01.png" alt="Project media"></div></figure>
+          <h2>Technical Details</h2><p>- EXR magic number validation: Checks the first 4 bytes of each .exr file against the OpenEXR spec rather than just <br>checking if the file exists: catches silently corrupted renders that would otherwise pass a simple file-existence check. <br>- MVP scope discipline: Focused on render management + validation as the two highest-impact pain poin</p>
+        </article>
+        <aside class="post-side reveal">
+          <h2>Built With</h2>
+          <div class="tag-list"><span>Maya</span><span>Python</span><span>PySide2</span><span>Arnold API</span></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© <span data-year></span> Hyunsu Yang</span>
+      <a href="../index.html">Back home</a>
+    </div>
+  </footer>
+  <script src="../assets/js/main.js?v=image-lightbox"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="description" content="Maya tool for saving, switching, exporting, and sharing lookdev setups across scenes.">
+  <title>LookDev Variant Manager  - Hyunsu Yang</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <style>
+    :root { --gold: #fca311; --black: #000000; --white: #ffffff; }
+    body.post-detail { background: var(--white); color: var(--black); }
+    .post-builder-media { margin: 1.8rem 0; }
+    .post-builder-frame { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--gray); }
+    .post-builder-frame img,
+    .post-builder-frame video { display: block; width: 100%; height: auto; }
+    .post-builder-media video { background: var(--black); }
+    .post-builder-frame .video-embed { margin: 0; border: 0; border-radius: 0; }
+    .post-builder-caption { margin: .75rem 0 0; color: var(--muted); font-size: .95rem; line-height: 1.55; }
+    .media-placeholder { display: grid; min-height: 260px; place-items: center; background: var(--soft); color: var(--muted); font-weight: 900; }
+    .post-main > p { color: var(--muted); font-size: 1.03rem; line-height: 1.75; }
+    .post-main > p + p { margin-top: 1rem; }
+  </style>
+</head>
+<body class="post-detail">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="../index.html">Hyunsu Yang</a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle>
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" data-nav-links>
+        <a href="../index.html">Home</a>
+        <a href="../posts.html">Posts</a>
+        <a href="../CV.html">CV</a>
+        <a href="../about.html">About</a>
+      </div>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="page-hero section-pad">
+      <div class="container narrow reveal">
+        <p class="eyebrow">Maya Python / Python / Arnold API </p>
+        <h1>LookDev Variant Manager </h1>
+        <p class="lead">Maya tool for saving, switching, exporting, and sharing lookdev setups across scenes.</p>
+        <div class="hero-actions"><a class="button button-secondary" href="../posts.html">All Posts</a></div>
+      </div>
+    </section>
+    <section class="section-pad">
+      <div class="container post-layout">
+        <article class="post-main reveal">
+          <figure class="post-builder-media"><div class="post-builder-frame"><video src="../assets/video/LookDevManager2.mp4" controls playsinline></video></div><p class="post-builder-caption">Demo</p></figure>
+          <h2>Goal</h2><p>Build a Maya Python tool that allows artists to save, manage, and share look development setups across scenes.</p>
+          <h2>Process</h2><p>- Captures the current lookdev state as a named variant, including material assignments, shader parameters, texture paths, and lighting information.<br>- Variants can be saved, switched, exported, and imported as JSON files for cross-scene and cross-artist sharing.</p>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/lookdev_demo.gif" alt="Can apply the Look even when geometry has referenced geo name"></div><p class="post-builder-caption">Can apply the Look even when geometry has referenced geo name</p></figure>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/lookdev_qt.webp" alt="I have done an initial concept for the Ui design in Qt Designer to figure out how the artist might use it."></div><p class="post-builder-caption">I have done an initial concept for the Ui design in Qt Designer to figure out how the artist might use it.</p></figure>
+          <h2>Technical Details</h2><p>- JSON serialization: Variants stored as human-readable JSON rather than Maya binary: allows version control via <br>Git, manual inspection, and cross-platform portability. <br>- Maya Python API for shader introspection: Uses cmds.listConnections and cmds.getAttr to capture the full shading <br>graph state rather than just top-level assignments, preserving texture connections and node parameter values.</p>
+          <h2>Comment</h2><p>The learning goal for this project was to build a Python tool in Maya that allows artists to easily save, manage, and share Look Development setups across scenes. I wanted to explore JSON as a lightweight data storage format and understand how shader assignments, material attributes, and lighting information could be serialized and reconstructed efficiently.</p><p>Another goal was to create a portable workflow where artists can export and import Looks (such as Clean, Dirty, Rusty variants) without heavy scene dependencies, keeping the data exchange between artists as lightweight and version-control friendly as possible.</p><p>For Look data, I used JSON to serialize shader assignments, material attributes, texture paths, and light properties. This keeps the exported files lightweight and easy to share between artists without heavy scene dependencies. To reconstruct shaders in an empty scene, the tool exports shader networks as .ma files and JSON then maps which shader gets assigned to which geometry upon import.<br>To handle name mismatches between scenes, I built a smart name matching system with a priority-based approach: it strips full paths down to basenames, removes namespaces, version suffixes (e.g., _v01, _v05), and common Maya suffixes (_GEO, _MESH), then attempts matching from exact to normalized. This means an artist can apply a Look even when geometry has been misspelled, versioned up, or re-referenced into a different hierarchy.</p><p>One challenge was getting lighting setups to properly reconstruct when applied to a new scene. Light types, intensities, and transform values needed careful handling to match the original setup. Figuring out how Maya stores and reconnects these attributes through Python was a great learning process.<br>If I were to expand on this project, I would look into supporting multiple render layer overrides and possibly integrating the tool with a pipeline-friendly asset management system.</p>
+        </article>
+        <aside class="post-side reveal">
+          <h2>Built With</h2>
+          <div class="tag-list"><span>Maya API</span><span>Python</span><span>JSON</span><span>Arnold API</span></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© <span data-year></span> Hyunsu Yang</span>
+      <a href="../index.html">Back home</a>
+    </div>
+  </footer>
+  <script src="../assets/js/main.js?v=image-lightbox"></script>
+</body>
+</html>

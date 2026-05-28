@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Procedural terrain generation with distance-based mud contact masks stored as vertex color." name="description"/>
+<title>Muddy Terrain Generator — Hyunsu Yang</title>
+<link href="../assets/css/styles.css" rel="stylesheet"/>
+</head>
+<body class="post-detail">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header" data-header="">
+<nav aria-label="Main navigation" class="nav">
+<a class="brand" href="../index.html">Hyunsu Yang</a>
+<button aria-expanded="false" aria-label="Open navigation" class="nav-toggle" data-nav-toggle="" type="button">
+<span></span><span></span><span></span>
+</button>
+<div class="nav-links" data-nav-links="">
+<a href="../index.html">Home</a>
+<a href="../posts.html">Posts</a>
+<a href="../CV.html">CV</a>
+<a href="../about.html">About</a>
+</div>
+</nav>
+</header>
+<main id="main">
+<section class="page-hero section-pad">
+<div class="container narrow reveal">
+<p class="eyebrow">Maya Python / OpenMaya API</p>
+<h1>Muddy Terrain Generator</h1>
+<p class="lead">Procedural terrain generation with distance-based mud contact masks stored as vertex color.</p>
+<div class="hero-actions"><a class="button button-secondary" href="../posts.html">All Posts</a></div>
+</div>
+</section>
+<section class="section-pad">
+<div class="container post-layout">
+<article class="post-main reveal">
+<div class="project-image"><img alt="Muddy Terrain Generator preview" src="../assets/img/posts/muddy-terrain-generator.webp"/></div>
+<h2>Goal</h2><ul class="detail-list"><li>A Maya Python script that procedurally generates mud terrain and computes distance-based mud contact masks on scattered objects.</li></ul><h2>Process</h2><ul class="detail-list"><li>Uses fBm noise to deform a subdivided grid into terrain shapes.</li><li>Scatters rock objects onto the surface using closestPointOnMesh queries.</li><li>Calculates a per-vertex mud influence mask based on each vertex proximity to the terrain. The mask is stored as vertex color and can drive shader blending.</li></ul><h2>Technical Details</h2><ul class="detail-list"><li>Uses Maya Python API 2.0, MFnMesh, and closestPointOnMesh.</li><li>Pipeline: distance field to falloff curve to vertex color.</li></ul>
+</article>
+<aside class="post-side reveal">
+<h2>Built With</h2>
+<div class="tag-list"><span>Python</span><span>Maya cmds</span><span>OpenMaya 2.0</span><span>Procedural</span></div>
+
+</aside>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<span>© <span data-year=""></span> Hyunsu Yang</span>
+<a href="../index.html">Back home</a>
+</div>
+</footer>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
