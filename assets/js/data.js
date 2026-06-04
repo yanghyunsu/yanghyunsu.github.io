@@ -36,7 +36,7 @@ window.portfolioData = {
       "tags": [
         "Nuke",
         "BlinkScript",
-        "Shader",
+        "Python",
         "fBm"
       ],
       "href": "posts/risograph-shader.html",
@@ -62,8 +62,7 @@ window.portfolioData = {
       "tags": [
         "Nuke",
         "BlinkScript",
-        "Python",
-        "AOV"
+        "Python"
       ],
       "href": "posts/aov-relight-toolkit.html",
       "label": "AOV",
