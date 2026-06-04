@@ -30,6 +30,20 @@ window.portfolioData = {
   ],
   "projects": [
     {
+      "title": "Risograph Shader",
+      "type": "Nuke BlinkScript",
+      "summary": "A three-stage BlinkScript system for ink separation, procedural grain, and print assembly.",
+      "tags": [
+        "Nuke",
+        "BlinkScript",
+        "Shader",
+        "fBm"
+      ],
+      "href": "posts/risograph-shader.html",
+      "label": "RISO",
+      "image": "assets/img/posts/risograph-shader.webp"
+    },
+    {
       "title": "Surface Scatter",
       "type": "Project",
       "summary": "Upcoming surface scattering study reserved for the next featured project.",
@@ -55,20 +69,6 @@ window.portfolioData = {
       "label": "AOV",
       "image": "assets/img/posts/aov-relight-toolkit.webp",
       "repositoryUrl": "https://github.com/yanghyunsu/AOV-Relight-Toolkit"
-    },
-    {
-      "title": "Risograph Shader",
-      "type": "Nuke BlinkScript",
-      "summary": "A three-stage BlinkScript system for ink separation, procedural grain, and print assembly.",
-      "tags": [
-        "Nuke",
-        "BlinkScript",
-        "Shader",
-        "fBm"
-      ],
-      "href": "posts/risograph-shader.html",
-      "label": "RISO",
-      "image": "assets/img/posts/risograph-shader.webp"
     },
     {
       "title": "Arnold Render Manager",
