@@ -31,12 +31,12 @@ window.portfolioData = {
   "projects": [
     {
       "title": "Risograph Shader",
-      "type": "Nuke BlinkScript",
-      "summary": "A three-stage BlinkScript system for ink separation, procedural grain, and print assembly.",
+      "type": "Nuke Gizmo / BlinkScript / Python",
+      "summary": "A Nuke gizmo for building risograph-style ink separation, halftone texture, grain, paper, and print misregistration effects.",
       "tags": [
         "Nuke",
         "BlinkScript",
-        "Python",
+        "Shader",
         "fBm"
       ],
       "href": "posts/risograph-shader.html",
@@ -62,7 +62,8 @@ window.portfolioData = {
       "tags": [
         "Nuke",
         "BlinkScript",
-        "Python"
+        "Python",
+        "AOV"
       ],
       "href": "posts/aov-relight-toolkit.html",
       "label": "AOV",
