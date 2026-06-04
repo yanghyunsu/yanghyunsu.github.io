@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <meta name="description" content="A three-stage BlinkScript system for ink separation, procedural grain, and print assembly.">
+  <meta name="description" content="A Nuke gizmo for building risograph-style ink separation, halftone texture, grain, paper, and print misregistration effects.">
   <title>Risograph Shader - Hyunsu Yang</title>
   <link rel="stylesheet" href="../assets/css/styles.css">
   <style>
@@ -33,25 +33,43 @@
   <main id="main">
     <section class="page-hero section-pad">
       <div class="container narrow reveal">
-        <p class="eyebrow">Nuke / BlinkScript</p>
+        <p class="eyebrow">Nuke BlinkScript</p>
         <h1>Risograph Shader</h1>
-        <p class="lead">A three-stage BlinkScript system for ink separation, procedural grain, and print assembly.</p>
+        <p class="lead">A Nuke gizmo for building risograph-style ink separation, halftone texture, grain, paper, and print misregistration effects.</p>
         <div class="hero-actions"><a class="button button-secondary" href="../posts.html">All Posts</a></div>
       </div>
     </section>
     <section class="section-pad">
       <div class="container post-layout">
-        <article class="post-main reveal"><figure class="post-builder-media"><div class="post-builder-frame"><video src="../assets/video/RisoDemo2.mp4" controls playsinline></video></div></figure>
-          <h2>Goal</h2><p>Recreate the look of Risograph printing inside Nuke using BlinkScript. The tool takes an RGB image and simulates ink separation, physical grain, and final print assembly.</p>
-          <h2>Process</h2>
-          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/RisoSteps0.png" alt="Stage-by-Stage Breakdown for Risograph print look in Nuke"></div><p class="post-builder-caption">Stage-by-Stage Breakdown for Risograph print look in Nuke</p></figure>
-          <ul class="detail-list"><li>Ink Separation converts RGB into three ink coverage channels using cosine similarity and luminance matching.</li><li>Ink Texture applies procedural fBm noise to each coverage channel with independent seed offsets.</li><li>Print Assembly composites the final image using multiply blend and offset sampling to simulate plate misregistration.</li></ul>
-          <h2>Technical Details</h2><p>- Hue-based separation looked artificial. Combined cosine similarity (color direction in RGB space) with luminance <br>matching to produce coverage values that feel like actual Riso ink plates rather than color filters. <br>- Cosine similarity (dot product of normalized color vectors) for ink separation <br>- fBm noise → valueNoise → fBm chain for procedural grain <br>- Multiply blend mode for physically-based subtractive ink compositin</p></article>
-        <aside class="post-side reveal"><h2>Built With</h2><div class="tag-list"><span>Nuke</span><span>BlinkScript</span><span>fBm</span></div></aside>
+        <article class="post-main reveal"><figure class="post-builder-media"><div class="post-builder-frame"><video src="../assets/video/RisoDemo2.mp4" controls playsinline></video></div><p class="post-builder-caption">Demo</p></figure>
+          <figure class="post-builder-media before-after-media">
+        <div class="compare-slider" data-compare style="--position: 50%;">
+          <img class="compare-img compare-before" src="../assets/img/Riso/RisoToy_Ori.jpeg" alt="Before image">
+          <div class="compare-after-wrap">
+            <img class="compare-img compare-after" src="../assets/img/Riso/RisoToy_Grain.jpeg" alt="After image">
+          </div>
+          <input class="compare-range" type="range" min="0" max="100" value="50" aria-label="Compare before and after images">
+          <div class="compare-handle" aria-hidden="true"></div>
+        </div>
+        <p class="post-builder-caption">Before and after comparison.</p>
+      </figure>
+          <h2>Feature</h2><ul class="detail-list"><li>3-ink risograph-style color separation</li><li>Halftone and grain texture modes</li><li>Shared ink palette for separation and final print color</li><li>Per-ink brightness and global contrast controls</li><li>Static Print Seed with Randomize Print button</li><li>Misregistration controls for offset ink passes</li><li>Frame matte input for breakout-style print masks</li></ul>
+          <h2>3-Ink Separation</h2>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/Riso/3InkSeparation.gif" alt="Convert source RGB into three ink coverage plates designed for risograph-style printing. Each ink can be tuned with its own color and brightness, while global contrast controls the strength and clarity of the separated print plates."></div><p class="post-builder-caption">Convert source RGB into three ink coverage plates designed for risograph-style printing. Each ink can be tuned with its own color and brightness, while global contrast controls the strength and clarity of the separated print plates.</p></figure>
+          <h2>Halftone / Grain Texture</h2>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/Riso/GrainHalftone.gif" alt="Switch between halftone dots and grain-based ink texture. 
+Halftone mode creates screen-like dot patterns from the separated ink coverage, while grain mode gives softer procedural ink breakup."></div><p class="post-builder-caption">Switch between halftone dots and grain-based ink texture. <br>Halftone mode creates screen-like dot patterns from the separated ink coverage, while grain mode gives softer procedural ink breakup.</p></figure>
+          <h2>Randomize Print Seed</h2>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/Riso/PrintGrainRandomize.gif" alt="Use the Randomize Print button to instantly create a new static variation. Each random seed produces a different print texture, paper grain, and registration feel while staying stable across frames."></div><p class="post-builder-caption">Use the Randomize Print button to instantly create a new static variation. Each random seed produces a different print texture, paper grain, and registration feel while staying stable across frames.</p></figure>
+          <h2>Misregistration</h2>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/Riso/Misregistration.gif" alt="Offset Ink 2 and Ink 3 relative to Ink 1 to recreate the imperfect plate alignment of physical risograph printing. Use subtle offsets for realistic registration drift or stronger values for a graphic poster look."></div><p class="post-builder-caption">Offset Ink 2 and Ink 3 relative to Ink 1 to recreate the imperfect plate alignment of physical risograph printing. Use subtle offsets for realistic registration drift or stronger values for a graphic poster look.</p></figure>
+          <h2>Frame Matte</h2>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/Riso/FrameBreak.gif" alt="Use an optional matte input to control frame breaks and breakout areas. This makes it easier to combine clean print borders with objects that extend outside the printed frame."></div><p class="post-builder-caption">Use an optional matte input to control frame breaks and breakout areas. This makes it easier to combine clean print borders with objects that extend outside the printed frame.</p></figure></article>
+        <aside class="post-side reveal"><h2>Built With</h2><div class="tag-list"><span>Nuke</span><span>BlinkScript</span><span>Python</span><span>Shader</span><span>fBm</span></div></aside>
       </div>
     </section>
   </main>
   <footer class="site-footer"><div class="container footer-inner"><span>© <span data-year></span> Hyunsu Yang</span><a href="../index.html">Back home</a></div></footer>
-  <script src="../assets/js/main.js?v=image-lightbox"></script>
+  <script src="../assets/js/main.js?v=compare-slider"></script>
 </body>
 </html>
