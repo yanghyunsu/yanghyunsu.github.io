@@ -88,7 +88,7 @@
   }
 
   function setupImageLightbox() {
-    const images = document.querySelectorAll(".post-detail .post-main img");
+    const images = document.querySelectorAll(".post-detail .post-main img:not(.compare-img)");
     if (!images.length) return;
 
     const lightbox = document.createElement("div");
@@ -139,7 +139,22 @@
     });
   }
 
+  function setupCompareSliders() {
+    document.querySelectorAll("[data-compare]").forEach((slider) => {
+      const range = slider.querySelector(".compare-range");
+      if (!range) return;
+
+      function update() {
+        slider.style.setProperty("--position", `${range.value}%`);
+      }
+
+      range.addEventListener("input", update);
+      update();
+    });
+  }
+
   renderCards();
+  setupCompareSliders();
   setupImageLightbox();
   observeReveals();
 })();
