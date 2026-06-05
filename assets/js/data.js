@@ -36,7 +36,7 @@ window.portfolioData = {
       "tags": [
         "Nuke",
         "BlinkScript",
-        "Shader",
+        "Python",
         "fBm"
       ],
       "href": "posts/risograph-shader.html",
