@@ -36,24 +36,12 @@ window.portfolioData = {
       "tags": [
         "Nuke",
         "BlinkScript",
-        "Python",
+        "Shader",
         "fBm"
       ],
       "href": "posts/risograph-shader.html",
       "label": "RISO",
       "image": "assets/img/posts/risograph-shader.webp"
-    },
-    {
-      "title": "Surface Scatter",
-      "type": "Project",
-      "summary": "Upcoming surface scattering study reserved for the next featured project.",
-      "tags": [
-        "Coming Soon",
-        "Technical Art"
-      ],
-      "href": "posts/new-project.html",
-      "label": "SURFACE",
-      "image": "assets/img/posts/new-project.svg"
     },
     {
       "title": "AOV Relight Toolkit",
@@ -69,6 +57,30 @@ window.portfolioData = {
       "label": "AOV",
       "image": "assets/img/posts/aov-relight-toolkit.webp",
       "repositoryUrl": "https://github.com/yanghyunsu/AOV-Relight-Toolkit"
+    },
+    {
+      "title": "Particle Atmosphere Field",
+      "type": "Nuke Particle System",
+      "summary": "Atmospheric particle field R&D for building layered motion, depth, and texture in compositing workflows.",
+      "tags": [
+        "Nuke",
+        "Particle",
+        "Atmosphere"
+      ],
+      "label": "FIELD"
+    },
+    {
+      "title": "Fire Particle",
+      "type": "Nuke Particle System",
+      "summary": "A Nuke particle-system R&D study exploring procedural fire motion, turbulence, directional force, and particle curve controls.",
+      "tags": [
+        "Nuke",
+        "Particle",
+        "R&D"
+      ],
+      "href": "posts/fire-particle.html",
+      "label": "FIRE",
+      "image": "assets/img/FireNukeViewer.gif"
     },
     {
       "title": "Arnold Render Manager",
@@ -102,20 +114,6 @@ window.portfolioData = {
       "label": "LOOKDEV",
       "image": "assets/img/posts/lookdev-variant-manager.webp",
       "demoUrl": "https://youtu.be/0v5xHaHwAO8"
-    },
-    {
-      "title": "Muddy Terrain Generator",
-      "type": "Maya Python / OpenMaya API",
-      "summary": "Procedural terrain generation with distance-based mud contact masks stored as vertex color.",
-      "tags": [
-        "Python",
-        "Maya cmds",
-        "OpenMaya 2.0",
-        "Procedural"
-      ],
-      "href": "posts/muddy-terrain-generator.html",
-      "label": "MUD",
-      "image": "assets/img/posts/muddy-terrain-generator.webp"
     }
   ]
 };
