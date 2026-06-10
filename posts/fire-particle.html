@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <meta name="description" content="A Fire study built with Nuke’s native Particle system, exploring flame and ember behavior through sprite-based particles.">
+  <meta name="description" content="A Fire study built with Nuke’s native Particle system, exploring flame and ember behavior through sprite-based particles.
+
+">
   <title>Particle-Based Campfire R&amp;D - Hyunsu Yang</title>
   <link rel="stylesheet" href="../assets/css/styles.css">
   <style>
@@ -35,20 +37,24 @@
       <div class="container narrow reveal">
         <p class="eyebrow">Nuke Particle System</p>
         <h1>Particle-Based Campfire R&amp;D</h1>
-        <p class="lead">A Fire study built with Nuke’s native Particle system, exploring flame and ember behavior through sprite-based particles.</p>
+        <p class="lead">A Fire study built with Nuke’s native Particle system, exploring flame and ember behavior through sprite-based particles.
+
+</p>
         <div class="hero-actions"><a class="button button-secondary" href="../posts.html">All Posts</a></div>
       </div>
     </section>
     <section class="section-pad">
       <div class="container post-layout">
-        <article class="post-main reveal"><figure class="post-builder-media"><div class="post-builder-frame"><video src="../assets/video/FireParticleDemo.mp4" controls playsinline></video></div><p class="post-builder-caption">Demo</p></figure>
-          <h2>Overview</h2><p>This project started as a personal R&amp;D study after experimenting with Houdini pyro. <br>I wanted to see how far Nuke’s native Particle system could be pushed to create a fire element directly inside comp, without relying on an external simulation cache.</p>
-          <h2>Technical Breakdown</h2><p>The fire was built using native Nuke particle nodes. <br>A noise-based texture was used as the particle sprite source, while Directional Force and Turbulence controlled the upward flame motion. <br>Particle Curve was used to shape the lifetime behavior, allowing particles to grow, fade, and lose opacity toward the top of the flame.<br>The rendered particle pass was then treated in comp with grading and vector blur to push the result closer to a flame.</p>
-          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/fireParticleTexture.gif" alt="Noise-based sprite texture used as the particle source."></div><p class="post-builder-caption">Noise-based sprite texture used as the particle source.</p></figure>
-          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/DirectionalForce.png" alt="Directional Force pushes the particle volume upward to establish the main flame motion."></div><p class="post-builder-caption">Directional Force pushes the particle volume upward to establish the main flame motion.</p></figure>
-          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/ParticleCurve.png" alt="Particle Curve controls opacity and scale over particle lifetime, softening the flame tip."></div><p class="post-builder-caption">Particle Curve controls opacity and scale over particle lifetime, softening the flame tip.</p></figure>
-          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/FireNukeViewer.gif" alt="Final particle render preview inside the Nuke viewer"></div><p class="post-builder-caption">Final particle render preview inside the Nuke viewer</p></figure></article>
-        <aside class="post-side reveal"><h2>Built With</h2><div class="tag-list"><span>Nuke</span><span>Particle System</span></div></aside>
+        <article class="post-main reveal"><figure class="post-builder-media"><div class="post-builder-frame"><video src="../assets/video/FireParticleDemo.mp4" controls playsinline></video></div><p class="post-builder-caption">preview</p></figure>
+          <h2>Overview</h2><p>After experimenting with Houdini pyro, I wanted to reinterpret fire inside Nuke using only native particle and compositing tools. The goal was not to build a physically accurate pyro solver, but to create a controllable stylized campfire setup using particle emitters, procedural fire textures, force fields, and post-render image treatment.</p>
+          <h2>Technical Breakdown</h2><ul class="detail-list"><li>The fire was built using native Nuke particle nodes.</li><li>The setup starts with a procedural fire sprite built from animated turbulence noise and a radial falloff. This texture is used as the visual source for the particles, giving each particle an internal flame-like breakup rather than a flat solid color.</li><li>For the emission source, I used a flattened and displaced sphere as a custom emitter surface. This allowed the flame to originate from a wider campfire base instead of a single point emitter.</li><li>The fire is separated into multiple particle behaviors: a dense flame body, a lighter ember layer, and a post-render motion smear pass. Region-based directional forces push the flame upward, while localized turbulence breaks up the silhouette. ParticleCurve nodes control size and opacity over particle age to shape the flame lifecycle.</li><li>After rendering the particles through ScanlineRender, I generated a custom vector pass from image gradients and used VectorBlur to stretch the rendered particles into a more flame-like motion. Additional grading, sharpening, and glow were used to integrate the final fire pass.</li></ul>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/fire/fireParticleTexture.gif" alt="Noise-based sprite texture, animated turbulence and radial falloff used to create the procedural fire sprite."></div><p class="post-builder-caption">Noise-based sprite texture, animated turbulence and radial falloff used to create the procedural fire sprite.</p></figure>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/fire/Geometry-basedemitter.gif" alt="I used a procedurally displaced and flattened sphere as the emission surface, allowing the flame to originate from a broad campfire base"></div><p class="post-builder-caption">I used a procedurally displaced and flattened sphere as the emission surface, allowing the flame to originate from a broad campfire base</p></figure>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/fire/DirectionalForce.png" alt="Directional Force pushes the particle volume upward to establish the main flame motion."></div><p class="post-builder-caption">Directional Force pushes the particle volume upward to establish the main flame motion.</p></figure>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/fire/ParticleCurve.png" alt="ParticleCurve controls opacity and size over particle age, shaping the flame from base to tip."></div><p class="post-builder-caption">ParticleCurve controls opacity and size over particle age, shaping the flame from base to tip.</p></figure>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/FireNukeViewer.gif" alt="Final particle render after vector blur, grading, sharpening, and glow treatment."></div><p class="post-builder-caption">Final particle render after vector blur, grading, sharpening, and glow treatment.</p></figure>
+          <h2>What I learned</h2><p>This study helped me understand the difference between using particles as simple sprites and shaping them as a layered FX element. The flame body, smoke, and embers required different motion behaviour, lifetime curves, and post-render treatment. I also found that proxy geometry is more useful as an occlusion and shaping tool for the main flame, while bounce-style interaction works better on small ember particles.</p></article>
+        <aside class="post-side reveal"><h2>Built With</h2><div class="tag-list"><span>Nuke</span><span>Particle system</span></div></aside>
       </div>
     </section>
   </main>
