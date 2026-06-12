@@ -41,13 +41,13 @@
     </section>
     <section class="section-pad">
       <div class="container post-layout">
-        <article class="post-main reveal"><figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/Lightning/LightningRender.gif" alt="Risograph Shader preview"></div><p class="post-builder-caption">Final Look</p></figure>
+        <article class="post-main reveal"><figure class="post-builder-media"><div class="post-builder-frame"><video src="../assets/video/3dviewerAndCompView.mp4" controls playsinline></video></div><p class="post-builder-caption">Simulation to final: raw particle points in the 3D viewer (left), the same frame composited with sprites and glow (right)</p></figure>
           <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/Lightning/lightning3Dview.gif" alt="Particle Simulation in 3D Viewer"></div><p class="post-builder-caption">Particle Simulation in 3D Viewer</p></figure>
           <h2>Overview</h2><p>This project explores a procedural lightning setup built with Nuke particle System. A timed particle emitter creates the hero bolt, while ParticleSpawn generates secondary branches and sparks. Cycle-based randomization controls strike position, colour variation, and branch count, giving each strike a unique pattern.</p>
           <h2>Technical Breakdown</h2>
           <ul class="detail-list">
             <li>Tracer-trail construction: a leader particle draws the bolt path under wind and layered turbulence during a pre-simulation window; ParticleSpawn trails stamp the path into a persistent bolt before the shot starts.</li>
-            <li>The remaining-lifetime clock: Nuke's particle expression language has no frame or time variable, so global timing is encoded at spawn instead. Setting <code>lifetime = deathFrame - frame</code> on the spawn node makes every trail particle die on the same frame, which turns <code>life - age</code> into a synchronized countdown inside the expression.</li>
+            <li>The remaining-lifetime clock: Nuke's particle expression language has no frame or time variable, so global timing is encoded at spawn instead. Setting <code>lifetime = deathFrame - frame</code> on the spawn node makes every trail particle die on the same frame, which turns <code>life - age</code> into a synchronized countdown inside the expression. </li>
             <li>Impact spike: the size expression layers a short decaying spike on top of the base profile, so each bolt lands at roughly 2x thickness on its exact impact frame and then relaxes: the strike's peak, with zero keyframes.</li>
             <li>Self-cycling strikes: modulo-driven emitter rate and trail lifetimes repeat the full appear → flash → fade choreography every N frames.</li>
             <li>Branch architecture: a secondary ParticleSpawn stream grows branch leaders off the hero bolt with their own wind and turbulence; branch trails run on a longer countdown, so they outlive the trunk and dissolve root-to-tip.</li>
@@ -55,7 +55,8 @@
           </ul>          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/Lightning/LightningSprite.gif" alt="Sprite materials (animated turbulence × radial falloff)"></div><p class="post-builder-caption">Sprite materials (animated turbulence × radial falloff)</p></figure>
           <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/Lightning/BoltDraw.gif" alt="Draw Time knob adjusting hero bolt length"></div><p class="post-builder-caption">Draw Time control: adjusting the hero bolt length from the master panel</p></figure>
           <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/Lightning/LightningNodeGraph.png" alt="Final Node Graph 
-a NoOp exposing knobs (timing, thickness, branch density, master seed, colour variation)"></div><p class="post-builder-caption">Final Node Graph <br>a NoOp exposing knobs (timing, thickness, branch density, master seed, colour variation)</p></figure></article>
+a NoOp exposing knobs (timing, thickness, branch density, master seed, colour variation)"></div><p class="post-builder-caption">Final Node Graph <br>a NoOp exposing knobs (timing, thickness, branch density, master seed, colour variation)</p></figure>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/Lightning/LightningRender.gif" alt="Final rendered lightning look"></div><p class="post-builder-caption">Final Look</p></figure></article>
         <aside class="post-side reveal"><h2>Built With</h2><div class="tag-list"><span>Nuke</span><span>Particle System</span><span>Particle Expressions</span></div></aside>
       </div>
     </section>
