@@ -47,7 +47,7 @@
           <h2>Technical Breakdown</h2>
           <ul class="detail-list">
             <li>Tracer-trail construction: a leader particle draws the bolt path under wind and layered turbulence during a pre-simulation window; ParticleSpawn trails stamp the path into a persistent bolt before the shot starts.</li>
-            <li>The remaining-lifetime clock: Nuke's particle expression language has no frame or time variable, so global timing is encoded at spawn instead. Setting <code>lifetime = deathFrame - frame</code> on the spawn node makes every trail particle die on the same frame, which turns <code>life - age</code> into a synchronized countdown inside the expression. Every event is authored as "N frames before death."</li>
+            <li>The remaining-lifetime clock: Nuke's particle expression language has no frame or time variable, so global timing is encoded at spawn instead. Setting <code>lifetime = deathFrame - frame</code> on the spawn node makes every trail particle die on the same frame, which turns <code>life - age</code> into a synchronized countdown inside the expression.</li>
             <li>Impact spike: the size expression layers a short decaying spike on top of the base profile, so each bolt lands at roughly 2x thickness on its exact impact frame and then relaxes: the strike's peak, with zero keyframes.</li>
             <li>Self-cycling strikes: modulo-driven emitter rate and trail lifetimes repeat the full appear → flash → fade choreography every N frames.</li>
             <li>Branch architecture: a secondary ParticleSpawn stream grows branch leaders off the hero bolt with their own wind and turbulence; branch trails run on a longer countdown, so they outlive the trunk and dissolve root-to-tip.</li>
