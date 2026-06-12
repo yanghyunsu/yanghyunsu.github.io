@@ -59,18 +59,20 @@ window.portfolioData = {
       "repositoryUrl": "https://github.com/yanghyunsu/AOV-Relight-Toolkit"
     },
     {
-      "title": "Particle Atmosphere Field",
+      "title": "Particle-Based Lightning",
       "type": "Nuke Particle System",
-      "summary": "Atmospheric particle field R&D for building layered motion, depth, and texture in compositing workflows.",
+      "summary": "A Nuke particle setup for timed lightning bursts, branching sparks, procedural sprite textures and force-driven motion.",
       "tags": [
         "Nuke",
         "Particle",
-        "Atmosphere"
+        "Expressions"
       ],
-      "label": "FIELD"
+      "href": "posts/particles-lightning.html",
+      "label": "LIGHTNING",
+      "image": "assets/img/Lightning/LightningRender.gif"
     },
     {
-      "title": "Fire Particle",
+      "title": "Particle-Based Fire",
       "type": "Nuke Particle System",
       "summary": "A Nuke particle-system R&D study exploring procedural fire motion, turbulence, directional force, and particle curve controls.",
       "tags": [
