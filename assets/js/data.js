@@ -68,7 +68,9 @@ window.portfolioData = {
         "JSON",
         "Pipeline"
       ],
-      "label": "RANGE"
+      "href": "posts/shot-range-manager.html",
+      "label": "RANGE",
+      "image": "assets/img/shotrange_nuke.gif"
     },
     {
       "title": "Particle-Based Lightning",
