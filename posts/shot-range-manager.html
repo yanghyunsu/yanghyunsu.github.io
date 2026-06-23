@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="description" content="A Maya and Nuke prototype for applying and reviewing department-specific shot frame ranges from a shared shot info.">
+  <title>Shot Range Manager - Hyunsu Yang</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <style>
+    :root { --gold: #fca311; --black: #000000; --white: #ffffff; }
+    body.post-detail { background: var(--white); color: var(--black); }
+    .post-builder-media { margin: 1.8rem 0; }
+    .post-builder-frame { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--gray); }
+    .post-builder-frame img, .post-builder-frame video { display: block; width: 100%; height: auto; }
+    .post-builder-media.natural-size .post-builder-frame { display: grid; justify-items: center; }
+    .post-builder-media.natural-size .post-builder-frame img { width: auto; max-width: 100%; }
+    .post-builder-media video { background: var(--black); }
+    .post-builder-frame .video-embed { margin: 0; border: 0; border-radius: 0; }
+    .post-builder-caption { margin: .75rem 0 0; color: var(--muted); font-size: .95rem; line-height: 1.55; }
+    .media-placeholder { display: grid; min-height: 260px; place-items: center; background: var(--soft); color: var(--muted); font-weight: 900; }
+    .post-main > p { color: var(--muted); font-size: 1.03rem; line-height: 1.75; }
+    .post-main > p + p { margin-top: 1rem; }
+  </style>
+</head>
+<body class="post-detail">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" data-header>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="../index.html">Hyunsu Yang</a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle><span></span><span></span><span></span></button>
+      <div class="nav-links" data-nav-links><a href="../index.html">Home</a><a href="../posts.html">Posts</a><a href="../CV.html">CV</a><a href="../about.html">About</a></div>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="page-hero section-pad">
+      <div class="container narrow reveal">
+        <p class="eyebrow">Maya / Nuke Pipeline Tool</p>
+        <h1>Shot Range Manager</h1>
+        <p class="lead">A Maya and Nuke prototype for applying and reviewing department-specific shot frame ranges from a shared shot info.</p>
+        <div class="hero-actions"><a class="button button-secondary" href="../posts.html">All Posts</a></div>
+      </div>
+    </section>
+    <section class="section-pad">
+      <div class="container post-layout">
+        <article class="post-main reveal"><figure class="post-builder-media"><div class="post-builder-frame"><video src="../assets/video/ShotRange.mp4" controls playsinline></video></div><p class="post-builder-caption">Demo</p></figure>
+          <h2>Overview</h2><p>Shot Range Manager is a small pipeline tool prototype built around a common production issue: the same shot can require different frame ranges depending on department context.</p><p>Animation may need extra handles for motion and ease-in/out. FX may need a wider working range for pre-roll and downstream review. Lighting or render may work from a cut-only range, while Nuke may be used either for cut review or full available source review.</p>
+          <h2>Architecture</h2><p>The tool is structured as a shared core with thin DCC adapters.</p><p>The core owns the range logic. Maya and Nuke do not reimplement the same calculations. They only consume the approved context and apply it in DCC-specific ways.</p><div class="post-diagram-block"><div><strong>Shot Context JSON</strong></div><div class="post-diagram-arrow">↓</div><div><code>DCC-agnostic Python core</code></div><div class="post-diagram-arrow">↓</div><div class="post-diagram-branch"><div><strong>Maya adapter</strong><br><code>scene settings</code></div><div><strong>Nuke adapter</strong><br><code>Read node review</code></div></div></div><p>This was the main design goal: adding another DCC should mean writing another thin adapter.</p>
+          <h2>Example Case</h2><p>For a demo film shot, the approved cut range is:</p><div class="post-data-block"><div><strong>Cut Range:</strong> <code>1001–1072</code></div></div><p>Different departments produce different working contexts:</p><div class="post-data-block"><div><strong>Animation:</strong> <code>989–1084</code></div><div><strong>FX:</strong> <code>969–1084</code></div><div><strong>Lighting:</strong> <code>1001–1072</code></div><div><strong>Render:</strong> <code>1001–1072</code></div><div><strong>Comp:</strong> <code>993–1080</code></div></div><p>In Maya, the selected department controls the timeline and scene settings.<br>In Nuke, the same context is used to evaluate whether the selected Read node is suitable for cut review, full handle review, or missing required frames.</p>
+          <h2>Maya Mode</h2><p>Maya mode loads the shot context, lets the artist choose a group, shot, and department, then displays the approved range data.</p>
+          <figure class="post-builder-media natural-size"><div class="post-builder-frame"><img src="../assets/img/shotrange_maya.gif" alt="- Maya mode displays approved shot context as read-only data. The department selection changes the calculated working range and render settings.
+- Switching departments changes the timeline range, handles, FPS/resolution context, and reason for the preset."></div><p class="post-builder-caption">- Maya mode displays approved shot context as read-only data. The department selection changes the calculated working range and render settings.<br>- Switching departments changes the timeline range, handles, FPS/resolution context, and reason for the preset.</p></figure>
+          <h2>Nuke Mode</h2><p>Nuke mode uses the same shot context but focuses on Read node review instead of scene setup.</p>
+          <figure class="post-builder-media"><div class="post-builder-frame"><img src="../assets/img/shotrange_nuke.gif" alt="- Nuke mode compares the selected Read node against the approved shot context and separates Cut Review from Full Available review.
+- The StickyNote summary records the shot context, Read node range, root range, root format, and status directly in the Nuke script."></div><p class="post-builder-caption">- Nuke mode compares the selected Read node against the approved shot context and separates Cut Review from Full Available review.<br>- The StickyNote summary records the shot context, Read node range, root range, root format, and status directly in the Nuke script.</p></figure>
+          <h2>Technical Breakdown</h2><ul class="detail-list"><li>The tool is built around a shared Python core that has no Maya or Nuke dependency. This core reads the shot configuration, looks up the selected shot and department, calculates cut range, timeline range, render range, handles, FPS, resolution, and builds a display context for the UI.</li><li>The Maya side acts as a scene setup adapter. The UI displays the approved context as read-only information, then applies the selected department range to the Maya timeline, render range, FPS, and render resolution.</li><li>The Maya timeline is set to the working range, which includes cut range plus handles. The render range is kept on the cut range only. This separates the artist’s working context from the actual render frame range.</li><li>The Nuke side uses the same shared core but applies it differently. Since Nuke consumes rendered EXRs, the Nuke adapter reads the selected Read node’s available frame range and format, compares that against the approved shot context, and sets the root range for review.</li><li>Nuke review is split into two modes. Cut Review sets the root range to the approved cut range, which may use for dailies or review. Full Available uses the selected Read node’s available range, which is useful when checking handles or source coverage.</li></ul>
+          <h2>What I Learned</h2><p>This project helped me think more clearly about the difference between a tool and a system. A frame range tool can look simple on the surface, but the underlying responsibility boundaries matter.</p><p>The most important design decision was separating the shared range logic from DCC-specific behaviour. Maya and Nuke use the same shot context, but they should not behave the same way. Maya prepares a scene before rendering. Nuke interprets rendered media after the fact.</p>
+          <h2>Limitations</h2><p>This is a prototype and does not connect to ShotGrid or a real studio publish database. The local JSON file is only used as a mock shot-context provider.</p></article>
+        <aside class="post-side reveal"><h2>Built With</h2><div class="tag-list"><span>Python</span><span>JSON</span><span>Nuke</span><span>Maya</span><span>Maya cmds UI</span></div></aside>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>© <span data-year></span> Hyunsu Yang</span><a href="../index.html">Back home</a></div></footer>
+  <script src="../assets/js/main.js?v=compare-slider"></script>
+</body>
+</html>
