@@ -61,7 +61,7 @@ window.portfolioData = {
     {
       "title": "Shot Range Manager",
       "type": "Maya / Nuke Pipeline Tool",
-      "summary": "Department-based frame range presets for Maya/Nuke production context. This prototype uses local JSON as a mock ShotGrid/show-context provider; in a studio pipeline, the same data would typically come from ShotGrid, editorial data, or show configuration.",
+      "summary": "Department-based frame range presets for Maya/Nuke production context. This prototype uses local JSON as a mock ShotGrid/show-context provider.",
       "tags": [
         "Maya",
         "Nuke",
