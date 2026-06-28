@@ -327,6 +327,10 @@ ul { padding-left: 1.25rem; }
 .embedded-reels-section .section-head {
   margin-bottom: 3rem;
 }
+.embedded-reel-stack {
+  display: grid;
+  gap: 3.25rem;
+}
 .embedded-reel-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -337,20 +341,37 @@ ul { padding-left: 1.25rem; }
   display: grid;
   gap: .9rem;
 }
+.embedded-reel-feature {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.embedded-reel-card h2,
 .embedded-reel-card h3 {
-  color: var(--gold);
-  font-size: clamp(2.2rem, 5vw, 4rem);
-  line-height: .95;
-  letter-spacing: -.07em;
+  margin: 0;
+  color: var(--black);
+  line-height: 1;
+  letter-spacing: 0;
   text-align: center;
+  font-weight: 950;
+}
+.embedded-reel-feature h2 {
+  font-size: 4.6rem;
+}
+.embedded-reel-secondary-grid .embedded-reel-card h3 {
+  font-size: 2.65rem;
 }
 .embedded-reel-card p {
   min-height: 3rem;
   margin: 0 auto .75rem;
   max-width: 480px;
   color: var(--muted);
-  font-size: clamp(1rem, 1.8vw, 1.22rem);
+  font-size: 1.18rem;
   text-align: center;
+}
+.embedded-reel-feature p {
+  min-height: auto;
+  max-width: 720px;
 }
 .responsive-iframe {
   overflow: hidden;
@@ -377,11 +398,21 @@ ul { padding-left: 1.25rem; }
   .embedded-reel-grid {
     grid-template-columns: 1fr;
   }
+  .embedded-reel-stack {
+    gap: 2.5rem;
+  }
+  .embedded-reel-feature h2 {
+    font-size: 3rem;
+  }
+  .embedded-reel-secondary-grid .embedded-reel-card h3 {
+    font-size: 2.2rem;
+  }
   .post-diagram-branch {
     grid-template-columns: 1fr;
   }
   .embedded-reel-card p {
     min-height: auto;
+    font-size: 1rem;
   }
 }
 
