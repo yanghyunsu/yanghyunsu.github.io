@@ -130,9 +130,9 @@ p { margin-top: 0; }
 }
 .post-data-block code,
 .post-diagram-block code {
-  border-radius: 6px;
-  background: rgba(255,255,255,.58);
-  padding: .08rem .35rem;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
   color: var(--navy);
   font-family: inherit;
   font-size: inherit;
