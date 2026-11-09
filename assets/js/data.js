@@ -10,8 +10,8 @@ window.portfolioData = {
         "VFX"
       ],
       "label": "COMP",
-      "embedUrl": "https://player.vimeo.com/video/1199288845?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479",
-      "watchUrl": "https://vimeo.com/1199288845"
+      "embedUrl": "https://player.vimeo.com/video/1244983172?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479",
+      "watchUrl": "https://vimeo.com/1244983172"
     },
     {
       "title": "TD Reel",
